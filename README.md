@@ -3,7 +3,9 @@ This script converts a QIF with multiple accounts into a My Expenses backup whic
 
 My Expenses has a built-in QIF import feature, but only supports importing one account at a time, which may not be a reasonable option when you have dozens of accounts. If that is your casez this script is for you.
 
-*IMPORTANT:* My Expenses deletes all its previous data when importing a backup. If you just want to add new data, please contact me.
+**IMPORTANT:** My Expenses deletes all its previous data when importing a backup. If you just want to add new data, please contact me.
+
+## Compatibility
 
 What does it import:
  - Accounts
@@ -13,7 +15,7 @@ What does it import:
  - Transfers
  - Splits
  
- What does it *not* import?
+What does it *not* import:
  - Budgets
  - Plans
  - Attached documents
@@ -22,9 +24,9 @@ What does it import:
 
 ## Installation
 
- - Install NodeJS
- - Download `qif2myexpenses.js`
- - In the same directory where the `qif2myexpenses.js` file is run `npm install adm-zip sqlite3`
+ 1. Install NodeJS
+ 2. Download `qif2myexpenses.js`
+ 3. In the same directory where the `qif2myexpenses.js` file is run `npm install adm-zip sqlite3`
 
 ## Setup
 
