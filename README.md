@@ -18,6 +18,7 @@ What does it import:
 What does it *not* import:
  - Budgets
  - Plans
+ - Currencies
  - Attached documents
  - App configuration
  - Anything not specified in the "What does it import?" section
@@ -25,13 +26,14 @@ What does it *not* import:
 ## Installation
 
  1. Install NodeJS
- 2. Download `qif2myexpenses.js`
+ 2. Download `qif2myexpenses.js` and `template.db` files into the same directory
  3. In the same directory where the `qif2myexpenses.js` file is run `npm install adm-zip sqlite3`
 
 ## Setup
 
 Edit the `qif2myexpenses.js` file to set up the following behaviours:
- - default_transaction_status: Possible values are 'UNRECONCILED' (default), 'CLEARED', 'RECONCILED', 'VOID'
+ - `default_transaction_status`: Possible values are 'UNRECONCILED' (default), 'CLEARED', 'RECONCILED', 'VOID'
+ - `default_currency`: Define the currency used. This is the currency that will be used for all transactions
 
 ## Instructions
 
