@@ -35,8 +35,8 @@ Edit the `qif2myexpenses.js` file to set up the following behaviours:
 
 ## Instructions
 
- - Generate a file called `export.qif` and place it in the same directory where the `qif2myexpenses.js` file is 
- - Run `node qif2myexpenses.js` from the same directory where the `qif2myexpenses.js` file is 
+ 1. Generate a file called `export.qif` and place it in the same directory where the `qif2myexpenses.js` file is 
+ 2. Run `node qif2myexpenses.js` from the same directory where the `qif2myexpenses.js` file is 
 
 ## Help
 
