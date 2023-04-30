@@ -65,7 +65,6 @@ class Entry {
     async db_insert() {
 
         // Insert the object in the DB
-        if (this.amount == -19008 || this.amount == 19008) console.log("ENTRY DB_INSERT") // TODO REMOVE
         return this._id = await this.#insert();
 
 
@@ -112,7 +111,7 @@ class Entry {
             ')';
 
         if (debug) console.log(this);
-        if (debug) console.log(sql); // TODO REMOVE || true
+        if (debug) console.log(sql);
 
         return new Promise(resolve => {
             return db.run(
@@ -122,7 +121,7 @@ class Entry {
 
                     if (err) throw err;
 
-                    if (debug) console.log("ID: " + this.lastID); // TODO REMOVE || true
+                    if (debug) console.log("ID: " + this.lastID);
                     resolve(this.lastID);
                 }
             );
@@ -137,7 +136,7 @@ class Entry {
             ' WHERE _id = ' + this._id;
 
         if (debug) console.log(this);
-        if (debug) console.log(sql); // TODO REMOVE || true
+        if (debug) console.log(sql);
 
         return new Promise(resolve => {
             return db.run(
@@ -230,7 +229,9 @@ class Account extends Entry {
 
         this.last_used          = 0;
 
-        this.sort_key           = Object.keys(ids_map.categories).length + 1;
+        this.sort_key           = Object.keys(ids_map.
+                                             
+                                             ).length + 1;
 
         this.criterion          = 0;
 
@@ -296,6 +297,8 @@ class Category extends Entry {
         this.last_used          = 0;
 
         this.icon               = '';
+        
+        if (def.parent_id === undefined) this.color = Math.floor(Math.random() * 255 * 255 * 255);
 
     }
 
@@ -461,9 +464,6 @@ class Transfer extends Annotation {
 
             super(def);
 
-            const this_peer_transfer_key = Transfer.get_peer_transfer_key(this.def, false); // TODO REMOVE
-            if (this.amount == -19008 || this.amount == 19008) console.log("1 - " + this_peer_transfer_key + ": REQUEST DELETE " + matching_peer_transfer_key + ' (' + this._id + ')') // TODO REMOVE
-
         } else {
 
             // This is the first annotation of the transfer. Add it to the transfers waiting for peer list
@@ -474,7 +474,6 @@ class Transfer extends Annotation {
             const this_peer_transfer = transfers_waiting_for_peer[this_peer_transfer_key];
             if (!this_peer_transfer) transfers_waiting_for_peer[this_peer_transfer_key] = [];
             transfers_waiting_for_peer[this_peer_transfer_key].push(this);
-            if (this.amount == -19008 || this.amount == 19008) console.log("1 - " + this_peer_transfer_key + ": ADDED " + this_peer_transfer_key + ' (' + this._id + ')') // TODO REMOVE
 
         }
 
@@ -497,12 +496,7 @@ class Transfer extends Annotation {
             
             // Clear the transfer from the waiting list, so if there were several identical transfers each gets its rightful peer
             if (matching_peer_transfers.length === 0) delete transfers_waiting_for_peer[matching_peer_transfer_key];
-            const this_peer_transfer_key = Transfer.get_peer_transfer_key(this.def, false); // TODO REMOVE
-            if (this.amount == -19008 || this.amount == 19008) console.log("2 - " + this_peer_transfer_key + ": DELETED " + matching_peer_transfer_key + ' (' + this._id + ')') // TODO REMOVE
 
-        } else {
-            const this_peer_transfer_key = Transfer.get_peer_transfer_key(this.def, false); // TODO REMOVE
-            if (this.amount == -19008 || this.amount == 19008) console.log("2 - " + this_peer_transfer_key + ": WAIT FOR " + matching_peer_transfer_key + ' (' + this._id + ')') // TODO REMOVE
         }
 
     }
@@ -536,8 +530,6 @@ class Split extends Annotation {
 
         super(def);
 
-        if (this.amount == -19008 || this.amount == 19008) console.log("SPLIT") // TODO REMOVE
-
     }
 
 }
@@ -551,8 +543,6 @@ class SplitTransfer extends Transfer {
         if (![ 'parent_id' ].every(column => def[column] !== undefined)) throw new Error('Invalid QIF format: SplitTransfer is missing a mandatory field');
 
         super(def);
-
-        if (this.amount == -19008 || this.amount == 19008) console.log("TRANSFER SPLIT") // TODO REMOVE
 
     }
 
@@ -803,7 +793,6 @@ async function getOrCreateEntryIdByName(def_class, defOrFullname) {
 
             } else if (key == 'T' || key == 'U') {
                 def.amount_float = value;
-                if (def.amount_float == -190.08 || def.amount_float == 190.08) console.log("T FOUND") // TODO REMOVE
                 def.parsed_fields += key;
 
             } else if (key == 'M') {
@@ -851,7 +840,6 @@ async function getOrCreateEntryIdByName(def_class, defOrFullname) {
             } else if (key == '$') {
                 def = await check_split_submit(def, key);
                 def.amount_float = value;
-                if (def.amount_float == -190.08 || def.amount_float == 190.08) console.log("$ FOUND") // TODO REMOVE
                 def.parsed_fields += key;
 
             } else if (line == '^') {
@@ -881,7 +869,7 @@ async function getOrCreateEntryIdByName(def_class, defOrFullname) {
 
     if (Object.keys(transfers_waiting_for_peer).length > 0) {
         console.error('Error: All data was converted but some transfers have no matching annotation in the QIF file');
-        if (debug || true) console.log(Object.keys(transfers_waiting_for_peer)); // TODO REMOVE true
+        if (debug) console.log(Object.keys(transfers_waiting_for_peer));
         return;
     }
 
