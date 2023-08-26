@@ -229,9 +229,7 @@ class Account extends Entry {
 
         this.last_used          = 0;
 
-        this.sort_key           = Object.keys(ids_map.
-                                             
-                                             ).length + 1;
+        this.sort_key           = Object.keys(ids_map.categories).length + 1;
 
         this.criterion          = 0;
 
